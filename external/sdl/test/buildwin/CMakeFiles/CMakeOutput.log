@@ -1,0 +1,49 @@
+The system is: Windows - 10.0.17763 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.23.28107 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.23.28107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+
+The C compiler identification is MSVC, found in "D:/Android/graphics/SDL/SDL2-2.0.14/test/buildwin/CMakeFiles/3.16.0-rc3/CompilerIdC/CMakeCCompilerId.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: D:/Android/graphics/SDL/SDL2-2.0.14/test/buildwin/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_50741\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_50741.dir\build.make /nologo -L                  CMakeFiles\cmTC_50741.dir\build
+Building C object CMakeFiles/cmTC_50741.dir/testCCompiler.c.obj
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\Ocean\AppData\Local\Temp\nm8269.tmp
+testCCompiler.c
+Linking C executable cmTC_50741.exe
+	D:\Software\__Program\cmake-3.16.0-rc3-win64-x64\bin\cmake.exe -E vs_link_exe --intdir=CMakeFiles\cmTC_50741.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_50741.dir\objects1.rsp @C:\Users\Ocean\AppData\Local\Temp\nm842F.tmp
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: D:/Android/graphics/SDL/SDL2-2.0.14/test/buildwin/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_07b9a\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_07b9a.dir\build.make /nologo -L                  CMakeFiles\cmTC_07b9a.dir\build
+Building C object CMakeFiles/cmTC_07b9a.dir/CMakeCCompilerABI.c.obj
+	C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\Ocean\AppData\Local\Temp\nm8690.tmp
+CMakeCCompilerABI.c
+Linking C executable cmTC_07b9a.exe
+	D:\Software\__Program\cmake-3.16.0-rc3-win64-x64\bin\cmake.exe -E vs_link_exe --intdir=CMakeFiles\cmTC_07b9a.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~2\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_07b9a.dir\objects1.rsp @C:\Users\Ocean\AppData\Local\Temp\nm86FE.tmp
+
+
+
