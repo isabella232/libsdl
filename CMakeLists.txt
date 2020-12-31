@@ -32,8 +32,10 @@ message("UNIX=true")
 endif()
 
 add_subdirectory(src/libgui)
+#add_subdirectory(src/test)
 
-link_libraries(SDL2_test SDL2-static)
+link_libraries(SDL2_test)
+link_libraries(SDL2-static)
 link_libraries(SDL2main)
 
 # if(WINDOWS)

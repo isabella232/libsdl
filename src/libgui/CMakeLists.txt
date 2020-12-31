@@ -299,7 +299,7 @@ if(EMSCRIPTEN)
 endif()
 
 # When defined, respect CMake's BUILD_SHARED_LIBS setting:
-set(SDL_STATIC_ENABLED_BY_DEFAULT ON)
+set(SDL_STATIC_ENABLED_BY_DEFAULT OFF)
 if (NOT DEFINED SDL_SHARED_ENABLED_BY_DEFAULT)
   # ...unless decided already (as for EMSCRIPTEN)
 
@@ -316,6 +316,9 @@ if (NOT DEFINED SDL_SHARED_ENABLED_BY_DEFAULT)
     set(SDL_STATIC_ENABLED_BY_DEFAULT ON)
   endif()
 endif()
+
+set(SDL_SHARED_ENABLED_BY_DEFAULT OFF)
+set(SDL_STATIC_ENABLED_BY_DEFAULT ON)
 
 set(SDL_SUBSYSTEMS
     Atomic Audio Video Render Events Joystick Haptic Power Threads Timers
@@ -2304,7 +2307,7 @@ if(SDL_TEST)
   file(GLOB TEST_SOURCES ${SDL2_SOURCE_DIR}/src/test/*.c)
   add_library(SDL2_test STATIC ${TEST_SOURCES})
 
-  add_subdirectory(test)
+  #add_subdirectory(test)
 endif()
 
 ##### Installation targets #####
