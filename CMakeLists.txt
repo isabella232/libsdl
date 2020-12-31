@@ -32,6 +32,7 @@ message("UNIX=true")
 endif()
 
 add_subdirectory(src/libgui)
+add_subdirectory(src/libtest)
 #add_subdirectory(src/test)
 
 link_libraries(SDL2_test)

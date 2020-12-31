@@ -407,7 +407,7 @@ set(SDL_SHARED ${SDL_SHARED_ENABLED_BY_DEFAULT} CACHE BOOL "Build a shared versi
 set(SDL_STATIC ${SDL_STATIC_ENABLED_BY_DEFAULT} CACHE BOOL "Build a static version of the library")
 
 dep_option(SDL_STATIC_PIC      "Static version of the library should be built with Position Independent Code" OFF "SDL_STATIC" OFF)
-set_option(SDL_TEST            "Build the test directory" ON)
+#set_option(SDL_TEST            "Build the test directory" ON)
 
 # General source files
 file(GLOB SOURCE_FILES
@@ -2199,116 +2199,114 @@ endif()
 # Ensure that the extra cflags are used at compile time
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS}")
 
-# Always build SDLmain
-if(NOT WINDOWS_STORE)
-add_library(SDL2main STATIC ${SDLMAIN_SOURCES})
-target_include_directories(SDL2main PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
-set(_INSTALL_LIBS "SDL2main")
-if (NOT ANDROID)
-  set_target_properties(SDL2main PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
-endif()
-endif()
+# # Always build SDLmain
+# if(NOT WINDOWS_STORE)
+# add_library(SDL2main STATIC ${SDLMAIN_SOURCES})
+# target_include_directories(SDL2main PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
+# set(_INSTALL_LIBS "SDL2main")
+# if (NOT ANDROID)
+#   set_target_properties(SDL2main PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
+# endif()
+# endif()
 
-if (ANDROID AND HAVE_HIDAPI)
-  set(_INSTALL_LIBS ${_INSTALL_LIBS} "hidapi")
-endif()
+# if (ANDROID AND HAVE_HIDAPI)
+#   set(_INSTALL_LIBS ${_INSTALL_LIBS} "hidapi")
+# endif()
 
-if(SDL_SHARED)
-  add_library(SDL2 SHARED ${SOURCE_FILES} ${VERSION_SOURCES})
-  if(APPLE)
-    set_target_properties(SDL2 PROPERTIES
-      MACOSX_RPATH 1
-      OUTPUT_NAME "SDL2-${LT_RELEASE}")
-  elseif(UNIX AND NOT ANDROID)
-    set_target_properties(SDL2 PROPERTIES
-      VERSION ${LT_VERSION}
-      SOVERSION ${LT_REVISION}
-      OUTPUT_NAME "SDL2-${LT_RELEASE}")
-  else()
-    if(WINDOWS OR CYGWIN)
-      set_target_properties(SDL2 PROPERTIES
-        DEFINE_SYMBOL DLL_EXPORT)
-    endif()
-    set_target_properties(SDL2 PROPERTIES
-      VERSION ${SDL_VERSION}
-      SOVERSION ${LT_REVISION}
-      OUTPUT_NAME "SDL2")
-  endif()
-  if(MSVC AND NOT LIBC)
-    # Don't try to link with the default set of libraries.
-    set_target_properties(SDL2 PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
-    set_target_properties(SDL2 PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
-    set_target_properties(SDL2 PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
-  endif()
-  set(_INSTALL_LIBS "SDL2" ${_INSTALL_LIBS})
-  target_link_libraries(SDL2 PRIVATE ${EXTRA_LIBS} ${EXTRA_LDFLAGS})
-  target_include_directories(SDL2 PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
-  if(ANDROID)
-    target_include_directories(SDL2 PRIVATE ${ANDROID_NDK}/sources/android/cpufeatures)
-  else()
-    set_target_properties(SDL2 PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
-  endif()
-  if(IOS OR TVOS)
-    set_property(TARGET SDL2 APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
-    target_compile_definitions(SDL2 PRIVATE IOS_DYLIB=1)
-  endif()
-endif()
+# if(SDL_SHARED)
+#   add_library(SDL2 SHARED ${SOURCE_FILES} ${VERSION_SOURCES})
+#   if(APPLE)
+#     set_target_properties(SDL2 PROPERTIES
+#       MACOSX_RPATH 1
+#       OUTPUT_NAME "SDL2-${LT_RELEASE}")
+#   elseif(UNIX AND NOT ANDROID)
+#     set_target_properties(SDL2 PROPERTIES
+#       VERSION ${LT_VERSION}
+#       SOVERSION ${LT_REVISION}
+#       OUTPUT_NAME "SDL2-${LT_RELEASE}")
+#   else()
+#     if(WINDOWS OR CYGWIN)
+#       set_target_properties(SDL2 PROPERTIES
+#         DEFINE_SYMBOL DLL_EXPORT)
+#     endif()
+#     set_target_properties(SDL2 PROPERTIES
+#       VERSION ${SDL_VERSION}
+#       SOVERSION ${LT_REVISION}
+#       OUTPUT_NAME "SDL2")
+#   endif()
+#   if(MSVC AND NOT LIBC)
+#     # Don't try to link with the default set of libraries.
+#     set_target_properties(SDL2 PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
+#     set_target_properties(SDL2 PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
+#     set_target_properties(SDL2 PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
+#   endif()
+#   set(_INSTALL_LIBS "SDL2" ${_INSTALL_LIBS})
+#   target_link_libraries(SDL2 PRIVATE ${EXTRA_LIBS} ${EXTRA_LDFLAGS})
+#   target_include_directories(SDL2 PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
+#   if(ANDROID)
+#     target_include_directories(SDL2 PRIVATE ${ANDROID_NDK}/sources/android/cpufeatures)
+#   else()
+#     set_target_properties(SDL2 PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
+#   endif()
+#   if(IOS OR TVOS)
+#     set_property(TARGET SDL2 APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
+#     target_compile_definitions(SDL2 PRIVATE IOS_DYLIB=1)
+#   endif()
+# endif()
 
-if(ANDROID)
-  if(HAVE_HIDAPI)
-    add_library(hidapi SHARED ${SDL2_SOURCE_DIR}/src/hidapi/android/hid.cpp)
-  endif()
+# if(ANDROID)
+#   if(HAVE_HIDAPI)
+#     add_library(hidapi SHARED ${SDL2_SOURCE_DIR}/src/hidapi/android/hid.cpp)
+#   endif()
 
-  if(MSVC AND NOT LIBC)
-    # Don't try to link with the default set of libraries.
-    set_target_properties(hidapi PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
-    set_target_properties(hidapi PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
-    set_target_properties(hidapi PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
-  endif()
-  if(HAVE_HIDAPI)
-    target_link_libraries(hidapi log)
-  endif()
-endif()
+#   if(MSVC AND NOT LIBC)
+#     # Don't try to link with the default set of libraries.
+#     set_target_properties(hidapi PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
+#     set_target_properties(hidapi PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
+#     set_target_properties(hidapi PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
+#   endif()
+#   if(HAVE_HIDAPI)
+#     target_link_libraries(hidapi log)
+#   endif()
+# endif()
 
-if(SDL_STATIC)
-  set (BUILD_SHARED_LIBS FALSE)
-  add_library(SDL2-static STATIC ${SOURCE_FILES})
-  if (NOT SDL_SHARED OR NOT WIN32)
-    set_target_properties(SDL2-static PROPERTIES OUTPUT_NAME "SDL2")
-    # Note: Apparently, OUTPUT_NAME must really be unique; even when
-    # CMAKE_IMPORT_LIBRARY_SUFFIX or the like are given. Otherwise
-    # the static build may race with the import lib and one will get
-    # clobbered, when the suffix is realized via subsequent rename.
-  endif()
-  set_target_properties(SDL2-static PROPERTIES POSITION_INDEPENDENT_CODE ${SDL_STATIC_PIC})
-  if(MSVC AND NOT LIBC)
-    set_target_properties(SDL2-static PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
-    set_target_properties(SDL2-static PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
-    set_target_properties(SDL2-static PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
-  endif()
-  # TODO: Win32 platforms keep the same suffix .lib for import and static
-  # libraries - do we need to consider this?
-  set(_INSTALL_LIBS "SDL2-static" ${_INSTALL_LIBS})
-  target_link_libraries(SDL2-static ${EXTRA_LIBS} ${EXTRA_LDFLAGS})
-  target_include_directories(SDL2-static PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
-  if(ANDROID)
-    target_include_directories(SDL2-static PRIVATE ${ANDROID_NDK}/sources/android/cpufeatures)
-  else()
-    set_target_properties(SDL2-static PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
-  endif()
-  if(IOS OR TVOS)
-    set_property(TARGET SDL2-static APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
-  endif()
-endif()
+# if(SDL_STATIC)
+#   set (BUILD_SHARED_LIBS FALSE)
+#   add_library(SDL2-static STATIC ${SOURCE_FILES})
+#   if (NOT SDL_SHARED OR NOT WIN32)
+#     set_target_properties(SDL2-static PROPERTIES OUTPUT_NAME "SDL2")
+#     # Note: Apparently, OUTPUT_NAME must really be unique; even when
+#     # CMAKE_IMPORT_LIBRARY_SUFFIX or the like are given. Otherwise
+#     # the static build may race with the import lib and one will get
+#     # clobbered, when the suffix is realized via subsequent rename.
+#   endif()
+#   set_target_properties(SDL2-static PROPERTIES POSITION_INDEPENDENT_CODE ${SDL_STATIC_PIC})
+#   if(MSVC AND NOT LIBC)
+#     set_target_properties(SDL2-static PROPERTIES LINK_FLAGS_RELEASE "/NODEFAULTLIB")
+#     set_target_properties(SDL2-static PROPERTIES LINK_FLAGS_DEBUG "/NODEFAULTLIB")
+#     set_target_properties(SDL2-static PROPERTIES STATIC_LIBRARY_FLAGS "/NODEFAULTLIB")
+#   endif()
+#   # TODO: Win32 platforms keep the same suffix .lib for import and static
+#   # libraries - do we need to consider this?
+#   set(_INSTALL_LIBS "SDL2-static" ${_INSTALL_LIBS})
+#   target_link_libraries(SDL2-static ${EXTRA_LIBS} ${EXTRA_LDFLAGS})
+#   target_include_directories(SDL2-static PUBLIC "$<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>" $<INSTALL_INTERFACE:include> $<INSTALL_INTERFACE:include/SDL2>)
+#   if(ANDROID)
+#     target_include_directories(SDL2-static PRIVATE ${ANDROID_NDK}/sources/android/cpufeatures)
+#   else()
+#     set_target_properties(SDL2-static PROPERTIES DEBUG_POSTFIX "${SDL_CMAKE_DEBUG_POSTFIX}")
+#   endif()
+#   if(IOS OR TVOS)
+#     set_property(TARGET SDL2-static APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
+#   endif()
+# endif()
 
 ##### Tests #####
 
-# if(SDL_TEST)
-#   file(GLOB TEST_SOURCES ${SDL2_SOURCE_DIR}/src/test/*.c)
-#   add_library(SDL2_test STATIC ${TEST_SOURCES})
-
-#   #add_subdirectory(test)
-# endif()
+#if(SDL_TEST)
+  file(GLOB TEST_SOURCES ${SDL2_SOURCE_DIR}/src/*.c)
+  add_library(SDL2_test STATIC ${TEST_SOURCES})
+#endif()
 
 ##### Installation targets #####
 install(TARGETS ${_INSTALL_LIBS} EXPORT SDL2Targets
